@@ -5,6 +5,8 @@ VeADK 聊天机器人 Agent
 
 from veadk import Agent
 
+from chat_agent.tools.alert_structurer import format_alert_info
+
 # 根 Agent - 聊天机器人
 root_agent = Agent(
     name="友好聊天助手",
@@ -34,8 +36,13 @@ root_agent = Agent(
 ## 不能做的事
 - 不要提供违法或有害的建议
 - 不要编造信息
+
+## 工具使用
+- 用户单条告警需要结构化时，调用 `format_alert_info`，并原样返回其 JSON 结果
+- 普通聊天问题不调用告警结构化工具
 - 不要泄露隐私
 - 不要进行政治或宗教争论
 
-现在，用你最好的状态来和用户交流吧！"""
+现在，用你最好的状态来和用户交流吧！""",
+    tools=[format_alert_info],
 )
